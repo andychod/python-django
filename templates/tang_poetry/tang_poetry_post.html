@@ -1,0 +1,12 @@
+{% extends 'tang_poetry/tang_poetry_base.html' %}
+{% block title %}{{post.title}} - 文學天地 {% endblock %}
+{% block headmessage %}
+    <h3 style="font-family:微軟正黑體;">{{ post.title }}</h3>
+    <a style="font-family:微軟正黑體;" href="/tangpoetry/">回首頁</a>
+{% endblock %}
+{% block content %}
+        <p style="font-family:微軟正黑體; font-size:12pt; letter-spacing:2pt;">
+            {{ post.body}}
+        </p>
+        <!--p style="font-family:微軟正黑體; font-size:10pt; letter-spacing:1pt;">{{ post.body}}</p-->
+{% endblock %}

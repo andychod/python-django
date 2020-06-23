@@ -1,0 +1,25 @@
+{% extends 'tang_poetry/tang_poetry_base.html' %}
+{% block title %}唐詩練習{% endblock %}
+{% block headmessage %}
+    <h3 style="font-family:標楷體;">~~ 本站文章列表 ~~</h3>
+{% endblock %}
+{% block content %}
+    {% for post in posts %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p style="font-family:微軟正黑體; font-size:14pt;font-weight:bold">
+                    <a href="/tangpoetry/post/{{post.slug}}">{{post.title}}</a>
+                </p>
+            </div>
+            <div class="panel-body">
+                <p>
+                    {{ post.body| truncatechars:40 }}
+                </p>
+            </div>
+            <div class="panel-footer" style="background-color:#efefef">
+                <p>發布時間:{{ post.pub_date | date:"Y M D, h:m:s" }}</p>
+            </div>
+        </div>
+        <!--p style="font-family:微軟正黑體; font-size:10pt; letter-spacing:1pt;">{{ post.body}}</p-->
+    {% endfor %}
+{% endblock %}

@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mainsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tangpoetry/', views.tang_poetry),
+    path('tangpoetry/post/<slug:slug>', views.tang_poetry_showpost),
 ]
