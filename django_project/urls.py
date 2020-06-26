@@ -14,11 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from mainsite import views
+
+tangpoetry_patterns = [
+    path('', views.tang_poetry),
+    path('post/<slug:slug>', views.tang_poetry_showpost)
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tangpoetry/', views.tang_poetry),
-    path('tangpoetry/post/<slug:slug>', views.tang_poetry_showpost),
+    path('tangpoetry/', include(tangpoetry_patterns)),
 ]
