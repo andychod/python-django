@@ -17,6 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from mainsite import views
 
+news_pattern = [
+    path('', views.live_index),
+    path('<int:tvno>/', views.live_index, name='tv-url'),
+    path('entv/', views.live_entv),
+    path('entv/<int:tvno>/', views.live_entv, name='entv-url'),
+]
+
 tangpoetry_patterns = [
     path('', views.tang_poetry),
     path('post/<slug:slug>', views.tang_poetry_showpost)
@@ -25,4 +32,5 @@ tangpoetry_patterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tangpoetry/', include(tangpoetry_patterns)),
+    path('livenews/', include(news_pattern)),
 ]
