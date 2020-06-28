@@ -1,0 +1,30 @@
+{% extends "livenews/base.html" %}
+{% block title %}
+    電視新聞直播
+{% endblock %}
+{% block tvname %}現正撥出: {{tv.name}}{% endblock %}
+{% block menu %}
+<ul class="nav navbar-nav">
+
+    <li class="active"><a href="/livenews">Home</a></li>
+    {% for t in tv_list %}
+        <li>
+            <a href="{% url 'tv-url' forloop.counter0 %}">{{ t.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div id="tvcode" align="center">
+        {% if hour > 18 %}晚安
+        {% elif hour < 10 %}早安
+        {% else %}日安
+        {% endif %}
+        <br>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{tv.tvcode}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+{% endblock %}

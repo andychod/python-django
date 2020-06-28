@@ -1,0 +1,21 @@
+{% extends "livenews/base.html" %}
+{% block title %}
+    English News
+{% endblock %}
+{% block tvname %}Showing: {{tv.name}}{% endblock %}
+{% block menu %}
+<ul class="nav navbar-nav">
+    <li class="active"><a href="/livenews">Home</a></li>
+    <li><a href="{% url 'entv-url' 0%}">SkyNews</a></li>
+    <li><a href="{% url 'entv-url' 1%}">Euro News</a></li>
+    <li><a href="{% url 'entv-url' 2%}">India News</a></li>
+    <li><a href="{% url 'entv-url' 3%}">CNA</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div id="tvcode" align="center">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{tv.tvcode}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+{% endblock %}
