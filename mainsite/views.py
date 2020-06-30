@@ -47,3 +47,23 @@ def live_entv(request, tvno = 0):
     tv = tv_list[tvno]
     hour = now.timetuple().tm_hour
     return render(request, 'livenews/entv.html', locals())
+
+# 心情網頁用
+def blog_index(request):
+    posts = models.MoodPost.objects.filter(enabled=True).order_by('-pub_time')[:30]
+    moods = models.Mood.objects.all()
+    try:
+        user_id = request.GET['user_id']
+        user_pass = request.GET['user_pass']
+        user_post = request.GET['user_post']
+        user_mood = request.GET['mood']
+    except:
+        user_id = None
+        message = '如要張貼信息，則每一個欄位都要填寫'
+    if user_id != None:
+        mood = models.Mood.objects.get(status=user_mood)
+        post = models.MoodPost.objects.create(mood=mood, nickname=user_id, del_pass=user_pass, message=user_post)
+        post.save()
+        message = '成功儲存，請記得你的編輯密碼[{}]! 訊息需經審查後才會顯示。'.format(user_pass)
+    return render(request, 'blog/index.html', locals())
+
