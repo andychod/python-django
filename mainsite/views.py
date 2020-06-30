@@ -32,6 +32,7 @@ def live_index(request, tvno = 0):
     now = datetime.now()
     tvno = tvno
     tv = tv_list[tvno]
+    hour = now.timetuple().tm_hour
     return render(request, 'livenews/index.html', locals())
 
 def live_entv(request, tvno = 0):
