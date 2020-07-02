@@ -26,6 +26,7 @@ news_pattern = [
 
 blog_pattern = [
     path('', views.blog_index),
+    path('<int:pid>/<str:del_pass>', views.blog_index)
 ]
 
 tangpoetry_patterns = [

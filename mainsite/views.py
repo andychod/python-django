@@ -49,7 +49,7 @@ def live_entv(request, tvno = 0):
     return render(request, 'livenews/entv.html', locals())
 
 # 心情網頁用
-def blog_index(request):
+def blog_index(request, pid=None, del_pass=None):
     posts = models.MoodPost.objects.filter(enabled=True).order_by('-pub_time')[:30]
     moods = models.Mood.objects.all()
     try:
@@ -60,7 +60,21 @@ def blog_index(request):
     except:
         user_id = None
         message = '如要張貼信息，則每一個欄位都要填寫'
-    if user_id != None:
+    if del_pass and pid:
+        print("!!!!!")
+        print(pid)
+        try:
+            post = models.MoodPost.objects.get(id=pid)
+        except:
+            post = None
+        print(post)
+        if post:
+            if post.del_pass == del_pass:
+                post.delete()
+                message = '資料刪除成功'
+            else:
+                message = '密碼錯誤'
+    elif user_id != None:
         mood = models.Mood.objects.get(status=user_mood)
         post = models.MoodPost.objects.create(mood=mood, nickname=user_id, del_pass=user_pass, message=user_post)
         post.save()
