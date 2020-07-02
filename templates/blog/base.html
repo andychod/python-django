@@ -16,7 +16,7 @@
                     {% block tvname %}{% endblock %}
                 </div>
             </div>
-            {% block menu %}{% endblock %}
+            {% include "blog/header.html" %}
         </div>
     </nav>
 
@@ -24,6 +24,6 @@
     <div class="panel panel-default">
         <div class="panel-footer"><em>{{now}}</em></div>
     </div>
-{% include "livenews/footer.html" %}
+{% include "blog/footer.html" %}
 </body>
 </html>
