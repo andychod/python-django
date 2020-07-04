@@ -29,6 +29,7 @@ blog_pattern = [
     path('<int:pid>/<str:del_pass>', views.blog_index),
     path('list/', views.blog_listing),
     path('post/', views.blog_posting),
+    path('contact/', views.blog_contact),
 ]
 
 tangpoetry_patterns = [
