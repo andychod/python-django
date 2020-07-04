@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from mainsite import views
 
 news_pattern = [
@@ -29,6 +30,7 @@ blog_pattern = [
     path('<int:pid>/<str:del_pass>', views.blog_index),
     path('list/', views.blog_listing),
     path('post/', views.blog_posting),
+    path('post2db/', views.blog_post2db),
     path('contact/', views.blog_contact),
 ]
 
@@ -42,4 +44,5 @@ urlpatterns = [
     path('tangpoetry/', include(tangpoetry_patterns)),
     path('livenews/', include(news_pattern)),
     path('blog/', include(blog_pattern)),
+    url(r'^captcha/', include('captcha.urls')),
 ]

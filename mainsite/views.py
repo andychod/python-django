@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 from mainsite import models, forms
 
@@ -118,3 +118,18 @@ def blog_contact(request):
     else:
         form = forms.ContactForm()
     return render(request, 'blog/contact.html', locals())
+
+def blog_post2db(request):
+    if request.method == 'POST':
+        post_form = forms.PostForm(request.POST)
+        if post_form.is_valid():
+            message = "您的訊息已儲存，要等管理者啟用後才看得到"
+            post_form.save()
+            return HttpResponseRedirect('/blog/list/')
+        else:
+            message = "如要張貼訊息，則每一個欄位都要填..."
+    else:
+        post_form = forms.PostForm()
+        #moods = models.Mood.objects.all()
+        message = '如要張貼訊息，則每一個欄位都要填...'
+    return render(request, 'blog/post2db.html', locals())
