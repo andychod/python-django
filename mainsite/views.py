@@ -133,3 +133,34 @@ def blog_post2db(request):
         #moods = models.Mood.objects.all()
         message = '如要張貼訊息，則每一個欄位都要填...'
     return render(request, 'blog/post2db.html', locals())
+
+# 私人日記用
+def diary_index(request):
+    if 'username' in request.session:
+        username = request.session['username']
+        usercolor = request.session['usercolor']
+    return render(request, 'diary/index.html', locals())
+
+def diary_login(request):
+    if request.method == 'POST':
+        login_form = forms.DiaryLoginForm(request.POST)
+        if login_form.is_valid():
+            username=request.POST['user_name']
+            usercolor=request.POST['user_color']
+            message = '登入成功'
+        else:
+            message = '請檢察輸入的欄位內容'
+    else:
+        login_form = forms.DiaryLoginForm()
+    try:
+        if username:
+            request.session['username'] = username
+        if usercolor:
+            request.session['usercolor'] = usercolor
+    except:
+        pass
+    return render(request, 'diary/login.html', locals())
+
+def diary_logout(request):
+    request.session['username'] = None
+    return redirect('/diary')

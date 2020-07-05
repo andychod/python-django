@@ -39,10 +39,17 @@ tangpoetry_patterns = [
     path('post/<slug:slug>', views.tang_poetry_showpost)
 ]
 
+diary_patterns = [
+    path('', views.diary_index),
+    path('login/', views.diary_login),
+    path('logout/', views.diary_logout)
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tangpoetry/', include(tangpoetry_patterns)),
     path('livenews/', include(news_pattern)),
     path('blog/', include(blog_pattern)),
+    path('diary/', include(diary_patterns)),
     url(r'^captcha/', include('captcha.urls')),
 ]
